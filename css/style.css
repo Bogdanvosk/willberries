@@ -82,7 +82,7 @@ button {
 }
 
 .show-goods .long-goods {
-    display: block;
+    display: flex;
 }
 
 .slide {
