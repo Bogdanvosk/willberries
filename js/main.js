@@ -13,6 +13,7 @@ const mySwiper = new Swiper(".swiper-container", {
 const buttonCart = document.querySelector(".button-cart");
 const modalCart = document.querySelector("#modal-cart");
 const modalClose = document.querySelector(".modal-close");
+const body = document.querySelector("#body");
 
 const openModal = () => {
   modalCart.classList.add("show");
@@ -43,8 +44,7 @@ modalCart.addEventListener("click", event => {
     scrollLink.addEventListener("click", event => {
       event.preventDefault();
 
-      const id = scrollLink.getAttribute("href");
-      document.querySelector(id).scrollIntoView({
+      body.scrollIntoView({
         behavior: "smooth",
         block: "start"
       });
@@ -98,7 +98,8 @@ const renderCards = data => {
 };
 
 more.addEventListener("click", event => {
-  event.preventDefault;
+  event.preventDefault();
+
   getGoods().then(renderCards);
 });
 
@@ -123,5 +124,24 @@ navigationLinks.forEach(link => {
     const value = link.textContent;
 
     field ? filterCards(field, value) : getGoods().then(renderCards);
+  });
+});
+
+// Banner buttons
+
+const bannerButtons = document.querySelectorAll(".banner-button");
+
+bannerButtons.forEach(bannerBtn => {
+  const span = bannerBtn.querySelector("span");
+  bannerBtn.addEventListener("click", () => {
+    const field = span.dataset.field;
+    const value = span.dataset.filter;
+
+    body.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+    filterCards(field, value);
   });
 });
